@@ -27,4 +27,12 @@ export const Query: IQuery<Context> = {
       }
     });
   },
+
+  singleTodoById: async (_, { id } , { prisma }) => {
+    return await prisma.todo.findUnique({
+      where: {
+        id: id
+      }
+    });
+  },
 };

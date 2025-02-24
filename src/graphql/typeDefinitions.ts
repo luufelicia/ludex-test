@@ -36,5 +36,6 @@ export const typeDefs = /* GraphQL */ `
     allTodo: [Todo!]!
     allIncompleteTodo: [Todo!]!
     allCompleteTodo: [Todo!]!
+    singleTodoById(id: ID!): Todo
   }
 `;
