@@ -9,4 +9,13 @@ export default [
   {languageOptions: { globals: globals.browser }},
   pluginJs.configs.recommended,
   ...tseslint.configs.recommended,
+
+  {
+    rules: {
+      "@typescript-eslint/no-empty-object-type": "off", // Disable the rule
+      "@typescript-eslint/no-explicit-any": "off"
+    },
+  },
 ];
+
+
