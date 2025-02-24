@@ -42,6 +42,13 @@ export type Something = {
   name: Scalars['String']['output'];
 };
 
+export type Todo = {
+  __typename?: 'Todo';
+  completed: Scalars['Boolean']['output'];
+  id: Scalars['ID']['output'];
+  name: Scalars['String']['output'];
+};
+
 
 
 export type ResolverTypeWrapper<T> = Promise<T> | T;
@@ -120,6 +127,7 @@ export type ResolversTypes = {
   Query: ResolverTypeWrapper<{}>;
   Something: ResolverTypeWrapper<Something>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
+  Todo: ResolverTypeWrapper<Todo>;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -131,6 +139,7 @@ export type ResolversParentTypes = {
   Query: {};
   Something: Something;
   String: Scalars['String']['output'];
+  Todo: Todo;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
@@ -148,9 +157,17 @@ export type SomethingResolvers<ContextType = any, ParentType extends ResolversPa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type TodoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Todo'] = ResolversParentTypes['Todo']> = {
+  completed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Something?: SomethingResolvers<ContextType>;
+  Todo?: TodoResolvers<ContextType>;
 };
 
