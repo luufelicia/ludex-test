@@ -56,6 +56,7 @@ export type MutationCreateTodoArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  allIncompleteTodo: Array<Todo>;
   allSomething: Array<Something>;
   allTodo: Array<Todo>;
   hello?: Maybe<Scalars['String']['output']>;
@@ -183,6 +184,7 @@ export type MutationResolvers<ContextType = any, ParentType extends ResolversPar
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  allIncompleteTodo?: Resolver<Array<ResolversTypes['Todo']>, ParentType, ContextType>;
   allSomething?: Resolver<Array<ResolversTypes['Something']>, ParentType, ContextType>;
   allTodo?: Resolver<Array<ResolversTypes['Todo']>, ParentType, ContextType>;
   hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
