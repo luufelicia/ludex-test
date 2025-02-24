@@ -1,8 +1,16 @@
 import { type MutationResolvers as IMutation } from "./generated/graphql";
 import { Context } from "./context";
+import { z } from "zod";
+
+//creates a zod schema that validates a title field
+const todoSchema = z.object({
+  title: z.string().min(1, "Title is required").max(255, "Title is too long"),
+});
 
 export const Mutation: IMutation<Context> = {
   createSomething: async (_, { input }, { prisma }) => {
+    //validation
+   
     const something = await prisma.something.create({
       data: {
         name: input.name,
@@ -16,6 +24,12 @@ export const Mutation: IMutation<Context> = {
   },
 
   createTodo: async (_, { input }, { prisma }) => {
+    const validation = todoSchema.safeParse(input);
+    if (!validation.success){
+      throw new Error(validation.error.errors.map(err => err.message).join(", "))
+    }
+
+
     const todo = await prisma.todo.create({
       data: {
         title: input.title,
