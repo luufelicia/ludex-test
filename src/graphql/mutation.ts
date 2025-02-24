@@ -65,7 +65,7 @@ export const Mutation: IMutation<Context> = {
   },
 
   deleteTodo: async (_, { id }, { prisma }) => {
-    const updatedTodo = await prisma.todo.delete({
+    await prisma.todo.delete({
       where: {
         id: id,
       },
