@@ -46,5 +46,22 @@ export const Mutation: IMutation<Context> = {
       completed: updatedTodo.completed,
     }
   },
+
+  changeTodoTitle: async (_, { id, title }, { prisma }) => {
+    const updatedTodo = await prisma.todo.update({
+      where: {
+        id: id,
+      },
+      data: {
+        title: title
+      }
+    });
+
+    return{
+      id: updatedTodo.id,
+      title: updatedTodo.title,
+      completed: updatedTodo.completed,
+    }
+  },
 };
 
