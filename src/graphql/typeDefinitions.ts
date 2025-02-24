@@ -16,8 +16,6 @@ export const typeDefs = /* GraphQL */ `
     id: ID!
     title: String!
     completed: Boolean!
-    createdAt: Date!
-    updatedAt: Date!
   }
 
 
@@ -29,5 +27,6 @@ export const typeDefs = /* GraphQL */ `
   type Query {
     hello: String
     allSomething: [Something!]!
+    allTodo: [Todo!]!
   }
 `;
