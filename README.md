@@ -1,5 +1,10 @@
 # LUDEX INTERNSHIP TEST
 
+## TO DO TASKS TRACKING:
+- Validations & Error Handling
+- Environment Variables (Look into what more variables are needed to secure the db connection)
+- Follow Best Practices (Refactor code)
+
 ## Getting Started
 
 ### Prerequisites
