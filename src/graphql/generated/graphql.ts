@@ -20,9 +20,29 @@ export type CreateSomethingInput = {
   name: Scalars['String']['input'];
 };
 
+export type CreateTodoInput = {
+  title: Scalars['String']['input'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
+  changeTodoStatus: Todo;
+  changeTodoTitle: Todo;
   createSomething: Something;
+  createTodo: Todo;
+  deleteTodo: Scalars['String']['output'];
+};
+
+
+export type MutationChangeTodoStatusArgs = {
+  completed: Scalars['Boolean']['input'];
+  id: Scalars['ID']['input'];
+};
+
+
+export type MutationChangeTodoTitleArgs = {
+  id: Scalars['ID']['input'];
+  title: Scalars['String']['input'];
 };
 
 
@@ -30,15 +50,46 @@ export type MutationCreateSomethingArgs = {
   input: CreateSomethingInput;
 };
 
+
+export type MutationCreateTodoArgs = {
+  input: CreateTodoInput;
+};
+
+
+export type MutationDeleteTodoArgs = {
+  id: Scalars['ID']['input'];
+};
+
 export type Query = {
   __typename?: 'Query';
+  allCompleteTodo: Array<Todo>;
+  allIncompleteTodo: Array<Todo>;
+  allSomething: Array<Something>;
+  allTodo: Array<Todo>;
   hello?: Maybe<Scalars['String']['output']>;
+  singleTodoById?: Maybe<Todo>;
+};
+
+
+export type QuerySingleTodoByIdArgs = {
+  id: Scalars['ID']['input'];
 };
 
 export type Something = {
   __typename?: 'Something';
   id: Scalars['ID']['output'];
   name: Scalars['String']['output'];
+};
+
+export type Todo = {
+  __typename?: 'Todo';
+  completed: Scalars['Boolean']['output'];
+  id: Scalars['ID']['output'];
+  title: Scalars['String']['output'];
+};
+
+export type TodoTitleInput = {
+  title: Scalars['String']['input'];
 };
 
 
@@ -114,30 +165,45 @@ export type DirectiveResolverFn<TResult = {}, TParent = {}, TContext = {}, TArgs
 export type ResolversTypes = {
   Boolean: ResolverTypeWrapper<Scalars['Boolean']['output']>;
   CreateSomethingInput: CreateSomethingInput;
+  CreateTodoInput: CreateTodoInput;
   ID: ResolverTypeWrapper<Scalars['ID']['output']>;
   Mutation: ResolverTypeWrapper<{}>;
   Query: ResolverTypeWrapper<{}>;
   Something: ResolverTypeWrapper<Something>;
   String: ResolverTypeWrapper<Scalars['String']['output']>;
+  Todo: ResolverTypeWrapper<Todo>;
+  TodoTitleInput: TodoTitleInput;
 };
 
 /** Mapping between all available schema types and the resolvers parents */
 export type ResolversParentTypes = {
   Boolean: Scalars['Boolean']['output'];
   CreateSomethingInput: CreateSomethingInput;
+  CreateTodoInput: CreateTodoInput;
   ID: Scalars['ID']['output'];
   Mutation: {};
   Query: {};
   Something: Something;
   String: Scalars['String']['output'];
+  Todo: Todo;
+  TodoTitleInput: TodoTitleInput;
 };
 
 export type MutationResolvers<ContextType = any, ParentType extends ResolversParentTypes['Mutation'] = ResolversParentTypes['Mutation']> = {
+  changeTodoStatus?: Resolver<ResolversTypes['Todo'], ParentType, ContextType, RequireFields<MutationChangeTodoStatusArgs, 'completed' | 'id'>>;
+  changeTodoTitle?: Resolver<ResolversTypes['Todo'], ParentType, ContextType, RequireFields<MutationChangeTodoTitleArgs, 'id' | 'title'>>;
   createSomething?: Resolver<ResolversTypes['Something'], ParentType, ContextType, RequireFields<MutationCreateSomethingArgs, 'input'>>;
+  createTodo?: Resolver<ResolversTypes['Todo'], ParentType, ContextType, RequireFields<MutationCreateTodoArgs, 'input'>>;
+  deleteTodo?: Resolver<ResolversTypes['String'], ParentType, ContextType, RequireFields<MutationDeleteTodoArgs, 'id'>>;
 };
 
 export type QueryResolvers<ContextType = any, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = {
+  allCompleteTodo?: Resolver<Array<ResolversTypes['Todo']>, ParentType, ContextType>;
+  allIncompleteTodo?: Resolver<Array<ResolversTypes['Todo']>, ParentType, ContextType>;
+  allSomething?: Resolver<Array<ResolversTypes['Something']>, ParentType, ContextType>;
+  allTodo?: Resolver<Array<ResolversTypes['Todo']>, ParentType, ContextType>;
   hello?: Resolver<Maybe<ResolversTypes['String']>, ParentType, ContextType>;
+  singleTodoById?: Resolver<Maybe<ResolversTypes['Todo']>, ParentType, ContextType, RequireFields<QuerySingleTodoByIdArgs, 'id'>>;
 };
 
 export type SomethingResolvers<ContextType = any, ParentType extends ResolversParentTypes['Something'] = ResolversParentTypes['Something']> = {
@@ -146,9 +212,17 @@ export type SomethingResolvers<ContextType = any, ParentType extends ResolversPa
   __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
 };
 
+export type TodoResolvers<ContextType = any, ParentType extends ResolversParentTypes['Todo'] = ResolversParentTypes['Todo']> = {
+  completed?: Resolver<ResolversTypes['Boolean'], ParentType, ContextType>;
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>;
+  title?: Resolver<ResolversTypes['String'], ParentType, ContextType>;
+  __isTypeOf?: IsTypeOfResolverFn<ParentType, ContextType>;
+};
+
 export type Resolvers<ContextType = any> = {
   Mutation?: MutationResolvers<ContextType>;
   Query?: QueryResolvers<ContextType>;
   Something?: SomethingResolvers<ContextType>;
+  Todo?: TodoResolvers<ContextType>;
 };
 
