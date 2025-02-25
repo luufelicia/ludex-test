@@ -1,8 +1,5 @@
 # LUDEX INTERNSHIP TEST
 
-## TO DO TASKS TRACKING:
-- Environment Variables (Look into what more variables are needed to secure the db connection)
-
 ## Getting Started
 
 ### Prerequisites
