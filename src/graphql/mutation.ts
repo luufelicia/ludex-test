@@ -2,7 +2,7 @@ import { type MutationResolvers as IMutation } from "./generated/graphql";
 import { Context } from "./context";
 import { z } from "zod";
 
-//creates a zod schema that validates a title field
+//creates a zod schema that validates a title, id, and completed fields
 const todoSchema = z.object({
   title: z.string().min(1, "Title is required").max(255, "Title is too long"),
   id: z.string().length(10, "ID should look like: 62c98cea-4474-4161-9933-8d4e45db3069"),
